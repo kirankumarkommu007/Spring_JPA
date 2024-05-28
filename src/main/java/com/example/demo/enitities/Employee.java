@@ -1,6 +1,5 @@
 package com.example.demo.enitities;
 
-
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -28,7 +27,6 @@ public class Employee {
 	private Double salary;
 	private String department;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "employee_id")
-	private List<Address> address;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "employee") // MappedBy for bi-direction
+	private List<Address> addresses;
 }
