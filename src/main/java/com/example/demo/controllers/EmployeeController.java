@@ -17,38 +17,59 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
+
+import com.example.demo.enitities.Employee;
+import com.example.demo.repos.EmployeeRepository;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
-    // Endpoint to find employees by department using JPQL
-    @GetMapping("/bydepartment/jpql")
-    public List<Employee> findEmployeesByDepartmentJPQL(@RequestParam String department) {
-        return employeeRepository.findEmployeesByDepartmentJPQL(department);
+	// Endpoint to find all employees with pagination
+	@GetMapping("/page")
+	public Page<Employee> getAllEmployeesWithPagination() {
+		int page = 0;
+		int size = 2;
+		Pageable pageable = PageRequest.of(page, size);
+		return employeeRepository.findAll(pageable);
+	}
+
+	// Endpoint to find all employees with sorting
+	@GetMapping("/sort")
+	public List<Employee> getAllEmployeesWithSorting(
+		) {
+		 String sortBy="name"; 
+		 String direction="asc";
+		Sort sort = direction.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+				: Sort.by(sortBy).descending();
+		return employeeRepository.findAll(sort);
+	}
+
+	// Endpoint to find employees by department with pagination and sorting
+    @GetMapping("/bydepartment")
+    public Page<Employee> getEmployeesByDepartment(@RequestParam String department, 
+			@RequestParam int page,
+			@RequestParam int size,
+			@RequestParam String sortBy, 
+			@RequestParam String direction) {
+        
+        Sort sort = direction.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+                : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return employeeRepository.findByDepartment(department, pageable);
     }
+
     
     
-    @GetMapping("/bydepartment/jpqlsingle")
-    public String findEmployeeByDepartmentJPQL(@RequestParam String department) {
-        String employee= employeeRepository.findEmployeenameByDepartmentJPQL(department);
-        return "we got the employee "+employee;
-    }
-
-
-    // Endpoint to find employees by department using native SQL
-    @GetMapping("/bydepartment/nativesql")
-    public List<Employee> findEmployeesByDepartmentNativeSQL(@RequestParam String department) {
-        return employeeRepository.findEmployeesByDepartmentNativeSQL(department);
-    }
-	
-    // Endpoint to find employees by name and department using indexed parameters
-    @GetMapping("/bynameanddepartment")
-    public List<Employee> findEmployeesByNameAndDepartment(@RequestParam String name, @RequestParam String department) {
-        return employeeRepository.findEmployeesByNameAndDepartment(name, department);
-    }
 }
-
