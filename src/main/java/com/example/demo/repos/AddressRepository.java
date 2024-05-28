@@ -10,5 +10,4 @@ import com.example.demo.enitities.Address;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Long> {
 
-	void save(List<Address> address);
 }

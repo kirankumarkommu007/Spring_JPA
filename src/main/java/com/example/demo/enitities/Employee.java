@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Employee_manytoone")
+@Table(name = "Query_annotations")
 public class Employee {
 
     @Id

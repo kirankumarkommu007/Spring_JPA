@@ -8,6 +8,11 @@ import com.example.demo.repos.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
 
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,31 +22,33 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
-	@GetMapping("/byname/{name}")
-	public List<Employee> findEmployeesByName(@PathVariable String name) {
-		return employeeRepository.findByName(name);
-	}
+    // Endpoint to find employees by department using JPQL
+    @GetMapping("/bydepartment/jpql")
+    public List<Employee> findEmployeesByDepartmentJPQL(@RequestParam String department) {
+        return employeeRepository.findEmployeesByDepartmentJPQL(department);
+    }
+    
+    
+    @GetMapping("/bydepartment/jpqlsingle")
+    public String findEmployeeByDepartmentJPQL(@RequestParam String department) {
+        String employee= employeeRepository.findEmployeenameByDepartmentJPQL(department);
+        return "we got the employee "+employee;
+    }
 
-	@GetMapping("/bydepartment/{department}")
-	public List<Employee> findEmployeesByDepartment(@PathVariable String department) {
-		return employeeRepository.findByDepartment(department);
-	}
 
-	@GetMapping("/countbydepartment")
-	public long countEmployeesByDepartment(@RequestParam String department) {
-		return employeeRepository.countByDepartment(department);
-	}
-
-	@DeleteMapping("/deletebyname/{name}")
-	public void deleteEmployeesByName(@PathVariable String name) {
-		employeeRepository.deleteByName(name);
-	}
-
-	@DeleteMapping("/deletebydepartment/{department}")
-	public void deleteEmployeesByDepartment(@PathVariable String department) {
-		employeeRepository.deleteByDepartment(department);
-	}
+    // Endpoint to find employees by department using native SQL
+    @GetMapping("/bydepartment/nativesql")
+    public List<Employee> findEmployeesByDepartmentNativeSQL(@RequestParam String department) {
+        return employeeRepository.findEmployeesByDepartmentNativeSQL(department);
+    }
+	
+    // Endpoint to find employees by name and department using indexed parameters
+    @GetMapping("/bynameanddepartment")
+    public List<Employee> findEmployeesByNameAndDepartment(@RequestParam String name, @RequestParam String department) {
+        return employeeRepository.findEmployeesByNameAndDepartment(name, department);
+    }
 }
+
