@@ -1,6 +1,5 @@
 package com.example.demo.enitities;
 
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +14,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Employee_oto")
+@Table(name = "Employee_oto_bi")
 public class Employee {
 
 	@Id
@@ -23,9 +22,8 @@ public class Employee {
 	private Long id;
 
 	private String name;
-
-    @OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="address_id")
+	
+	@OneToOne(mappedBy = "employee", cascade = CascadeType.ALL)
 	private Address address;
 
 }
