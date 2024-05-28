@@ -86,12 +86,12 @@
 			</plugin>
 		</plugins>
 		<resources>
-			<resource>
-				<directory>src/main/resources/db.changelog-master.yaml</directory>
-				<includes>
-					<include>db/changelog/chnages/**/*.yaml</include>
-				</includes>
-			</resource>
-		</resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <includes>
+                <include>db/changelog/**/*.xml</include>
+            </includes>
+        </resource>
+    </resources>
 	</build>
 </project>

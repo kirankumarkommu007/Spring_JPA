@@ -1,7 +1,0 @@
-databaseChangeLog:
-  - include:
-      file: db/changelog/changes/create-customer-table-changelog-1.yaml
-  - include:
-      file: db/changelog/changes/insert-customer-table-changelog-2.yaml
-  
-   
