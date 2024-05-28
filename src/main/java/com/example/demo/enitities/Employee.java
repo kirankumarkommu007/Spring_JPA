@@ -10,25 +10,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+
+import java.util.List;
+
+import jakarta.persistence.*;
 
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Employee_otm_bi")
+@Table(name = "Employee_manytoone")
 public class Employee {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private String name;
-	private Double salary;
-	private String department;
+    private String name;
+    private Double salary;
+    private String department;
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "employee_id")
-	private List<Address> address;
+  
 }
+
+
