@@ -1,6 +1,5 @@
 package com.example.demo;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -8,18 +7,22 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/employees")
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+    
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
 
-    @PostMapping("/add")
-    public Employee addEmployee(@Validated @RequestBody Employee employee) {
-        return employeeService.addEmployee(employee);
+    @PostMapping
+    public List<Employee> addEmployees(@Validated @RequestBody List<Employee> employees) {
+        return employeeRepository.saveAll(employees);
     }
 }

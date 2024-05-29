@@ -3,6 +3,8 @@ package com.example.demo;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,5 +37,4 @@ public class Employee {
     )
     private Set<Project> projects = new HashSet<>();
 
-    // Getters and Setters
 }
