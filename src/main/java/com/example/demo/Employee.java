@@ -29,6 +29,7 @@ public class Employee {
     private Double salary;
     private String department;
 
+//    @JsonManagedReference
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "employee_project",
@@ -36,5 +37,4 @@ public class Employee {
         inverseJoinColumns = @JoinColumn(name = "project_id")
     )
     private Set<Project> projects = new HashSet<>();
-
 }

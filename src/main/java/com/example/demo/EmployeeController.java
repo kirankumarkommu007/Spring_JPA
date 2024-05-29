@@ -13,8 +13,8 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
     
-    @Autowired
-    private EmployeeRepository employeeRepository;
+    
+    
 
     @GetMapping
     public List<Employee> getAllEmployees() {
@@ -23,6 +23,6 @@ public class EmployeeController {
 
     @PostMapping
     public List<Employee> addEmployees(@Validated @RequestBody List<Employee> employees) {
-        return employeeRepository.saveAll(employees);
+        return employeeService.addEmployees(employees);
     }
 }

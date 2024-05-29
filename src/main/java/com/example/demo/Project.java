@@ -16,7 +16,6 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name="project_manytomany_uni")
-
 public class Project {
 
     @Id
@@ -24,8 +23,8 @@ public class Project {
     private Long id;
 
     private String name;
-    
-//    @ManyToMany(mappedBy = "projects")
+
 //    @JsonBackReference
-//    private Set<Employee> employees = new HashSet<>();
+    @ManyToMany(mappedBy = "projects")
+    private Set<Employee> employees = new HashSet<>();
 }
