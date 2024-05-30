@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: "1"
+      author: kiran
+      insert:
+        tableName: Persons
+        columns:
+          - name: name
+            value: kiran
+          - name: email
+            value: kiran@gmail.com
+          - name: age
+            valueNumeric: 30
+  - changeSet:
+      id: "2"
+      author: kiran
+      insert:
+        tableName: Persons
+        columns:
+          - name: name
+            value: Jaanaki
+          - name: email
+            value: janaki@example.com
+          - name: age
+            valueNumeric: 25
+  - changeSet:
+      id: "3"
+      author: kiran
+      insert:
+        tableName: Persons
+        columns:
+          - name: name
+            value: Johnson
+          - name: email
+            value: johnson@example.com
+          - name: age
+            valueNumeric: 28

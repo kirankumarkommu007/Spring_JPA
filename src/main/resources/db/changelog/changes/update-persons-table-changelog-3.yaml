@@ -1,0 +1,10 @@
+databaseChangeLog:
+  - changeSet:
+      id: "2"
+      author: kiran
+      update:
+        tableName: Persons
+        columns:
+          - name: email
+            value: shivapabbu@newdomain.com
+        where: name='Jaanaki'

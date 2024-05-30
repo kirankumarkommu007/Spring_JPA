@@ -89,7 +89,7 @@
         <resource>
             <directory>src/main/resources</directory>
             <includes>
-                <include>db/changelog/**/*.xml</include>
+                <include>db/changelog/**/*.yaml</include>
             </includes>
         </resource>
     </resources>
