@@ -22,9 +22,9 @@ public class LiqibaseDemoApplication {
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://localhost:3306/liqibase")
+                .url("jdbc:mysql://localhost:3306/Spring_JPA")
                 .username("root")
-                .password("Master@123")
+                .password("Kiran@1226")
                 .build();
     }
 
